@@ -40,13 +40,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public @ResponseBody ServerResponse login(@RequestBody @Valid LoginDTO loginDTO,@RequestHeader("systemId")String systemId, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.BAD_REQUEST);
-        }
-        if(StringUtils.isBlank(systemId)){
+    public @ResponseBody ServerResponse login(@RequestBody @Valid LoginDTO loginDTO){
+        /*if(StringUtils.isBlank(systemId)){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.UNKNOWN);
-        }
+        }*/
         User user = userService.findEffectiveUser(loginDTO.getUsername());
         if(user == null || !StringUtils.equals(user.getPassword(), loginDTO.getPassword())){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.BAD_REQUEST.getCode(),"账号或密码有误");

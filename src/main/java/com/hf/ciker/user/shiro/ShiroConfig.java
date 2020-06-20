@@ -52,8 +52,14 @@ public class ShiroConfig {
         filterMap.put("/swagger-ui.html", "anon");
         filterMap.put("/swagger-resources/**", "anon");
         filterMap.put("/doc.html", "anon");
+        filterMap.put("/login.html", "anon");
+        filterMap.put("/js/**", "anon");
+        filterMap.put("/css/**", "anon");
+        filterMap.put("/img/**", "anon");
+        filterMap.put("/fonts/**", "anon");
         // 除了以上路径，其他都需要权限验证
         filterMap.put("/**", "auth");
+        shiroFilter.setLoginUrl("login.html");
         shiroFilter.setFilterChainDefinitionMap(filterMap);
 
         return shiroFilter;

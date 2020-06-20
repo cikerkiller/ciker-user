@@ -2,6 +2,7 @@ package com.hf.ciker.user.shiro;
 
 import com.hf.ciker.user.dto.ResponseCode;
 import com.hf.ciker.user.dto.ServerResponse;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,5 +22,11 @@ public class UnauthorizedExceptionHandler {
     @ResponseBody
     public ServerResponse jsonExceptionHandler(HttpServletRequest req, Exception e) {
         return ServerResponse.createByErrorCodeMessage(ResponseCode.INSUFFICIENT_PERMISSIONS);
+    }
+
+    @ExceptionHandler(value = AuthenticationException.class)
+    @ResponseBody
+    public ServerResponse authenticationExceptionHandler(HttpServletRequest req, Exception e) {
+        return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN);
     }
 }

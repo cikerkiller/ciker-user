@@ -5,6 +5,8 @@ server:
     max-threads: 1000
     min-spare-threads: 30
   port: 10100
+  servlet:
+    context-path: /ciker
   connection-timeout: 5000ms
 spring:
   jackson:
